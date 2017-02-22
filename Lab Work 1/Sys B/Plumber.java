@@ -64,12 +64,16 @@ public class Plumber
 		****************************************************************************/
 
     wildpointSinkFilter.ConnectA(pressureWildpointFilter);
+
     sinkFilter.ConnectA(pressureFilter);
+
     pressureFilter.ConnectA(middleFilter);
     pressureWildpointFilter.ConnectB(middleFilter);
-    middleFilter.ConnectA(pressureFilter);
-    pressureFilter.ConnectA(temperatureFilter);
-    middleFilter.ConnectA(source);
+
+    middleFilter.ConnectA(temperatureFilter);
+    temperatureFilter.ConnectA(altitudeFilter);
+
+    altitudeFilter.ConnectA(source);
 
 		/****************************************************************************
 		* Here we start the filters up.
@@ -77,6 +81,9 @@ public class Plumber
 
 
 		source.start();
+
+    altitudeFilter.start();
+    temperatureFilter.start();
 
     middleFilter.start();
 

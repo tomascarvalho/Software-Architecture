@@ -50,7 +50,7 @@ public class SinkFilter extends FilterFramework {
 		*************************************************************************************/
 
 		Calendar TimeStamp = Calendar.getInstance();
-		SimpleDateFormat TimeStampFormat = new SimpleDateFormat("yyyy:MM:dd:hh:mm:ss");
+		SimpleDateFormat TimeStampFormat = new SimpleDateFormat("yyyy:dd:HH:mm:ss");
 
     String fileName = "OutputB.dat";	// Input data file.
     PrintStream out = null;			// File stream reference.
@@ -93,7 +93,7 @@ public class SinkFilter extends FilterFramework {
 
         if (id == 4) {
           temperature = Double.longBitsToDouble(measurement);
-          out.format("%s %6.5f %2.5f ", TimeStampFormat.format(TimeStamp.getTime()), temperature, level, pressure);
+          out.format("%s\t%010.5f\t%011.5f\t", TimeStampFormat.format(TimeStamp.getTime()), temperature, level, pressure);
           if (pressure < 0) {
             pressure = -pressure;
             out.format("%3.5f*\n", pressure);

@@ -1,1 +1,6 @@
 *.class
+Output.dat
+OutputA.dat
+OutputB.dat
+OutputC.dat
+WildPoints.dat

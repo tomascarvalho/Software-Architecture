@@ -236,21 +236,25 @@ public class FilterFramework extends Thread
 
 		} // catch
 
-		// try
-		// {
-    //   OutputWritePortB.write((int) datum );
-		//   OutputWritePortB.flush();
-		// } // try
-		//
-		// catch( Exception Error )
-		// {
-		// 	System.out.println("\n" + this.getName() + " Pipe B write error::" + Error );
-		//
-		// } // catch
-
 		return;
 
 	} // WriteFilterPort
+
+  void WriteFilterOutputPortB(byte datum) {
+    try
+		{
+      OutputWritePortB.write((int) datum );
+		  OutputWritePortB.flush();
+		} // try
+
+		catch( Exception Error )
+		{
+			System.out.println("\n" + this.getName() + " Pipe B write error::" + Error );
+
+		} // catch
+
+    return;
+  }
 
 	/***************************************************************************
 	* CONCRETE METHOD:: EndOfInputStream

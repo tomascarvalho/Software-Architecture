@@ -48,8 +48,10 @@ public class Plumber
 
 		SourceFilter source = new SourceFilter();	// This is a source filter - see SourceFilterTemplate.java
 		PressureFilter pressureFilter = new PressureFilter();	// This is a standard filter - see FilterTemplate.java
+    PressureWildpointFilter pressureWildpointFilter = new PressureWildpointFilter();
 		WildpointSinkFilter wildpointSinkFilter = new WildpointSinkFilter();		// This is a sink filter - see SinkFilterTemplate.java
-    // PressureFilter Filter4 = new PressureFilter();
+    SinkFilter sinkFilter = new SinkFilter();
+    MiddleFilter middleFilter = new MiddleFilter();
 
 
 		/****************************************************************************
@@ -59,8 +61,11 @@ public class Plumber
 		* filter and working your way back to the source as shown here.
 		****************************************************************************/
 
-    wildpointSinkFilter.ConnectA(pressureFilter);
-    pressureFilter.ConnectA(source);
+    wildpointSinkFilter.ConnectA(pressureWildpointFilter);
+    sinkFilter.ConnectA(pressureFilter);
+    pressureFilter.ConnectA(middleFilter);
+    pressureWildpointFilter.ConnectB(middleFilter);
+    middleFilter.ConnectA(source);
 
 		/****************************************************************************
 		* Here we start the filters up.
@@ -68,7 +73,13 @@ public class Plumber
 
 
 		source.start();
+
+    middleFilter.start();
+
     pressureFilter.start();
+    pressureWildpointFilter.start();
+
+    sinkFilter.start();
     wildpointSinkFilter.start();
 
 

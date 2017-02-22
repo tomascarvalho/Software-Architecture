@@ -162,8 +162,8 @@ public class PressureFilter extends FilterFramework {
 
      while(frameBuffer.size() > 0) {
        Frame head = frameBuffer.removeFirst();
-
-       if(Double.longBitsToDouble(head.frame[3]) > 0) {
+       double framePressure = Double.longBitsToDouble(head.frame[3]);
+       if(framePressure > 0  && framePressure < 80) {
          System.out.println("Sending as last valid pressure: " + lastValidPressure);
          head.saveMeasurement(Double.doubleToLongBits(lastValidPressure), 3);
        } else {

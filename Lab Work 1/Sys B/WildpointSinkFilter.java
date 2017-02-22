@@ -122,8 +122,8 @@ public class WildpointSinkFilter extends FilterFramework {
 
 				if ( id == 3 )
 				{
-          out.format("%d %s\t%2.5f\n", id, TimeStampFormat.format(TimeStamp.getTime()), Double.longBitsToDouble(measurement));
-					System.out.format("%d %s\t%2.5f\n", id, TimeStampFormat.format(TimeStamp.getTime()), Double.longBitsToDouble(measurement));
+          out.format("%s\t%2.5f\n", TimeStampFormat.format(TimeStamp.getTime()), Double.longBitsToDouble(measurement));
+					System.out.format("%s\t%2.5f\n", TimeStampFormat.format(TimeStamp.getTime()), Double.longBitsToDouble(measurement));
 
 				} // if
 

@@ -47,6 +47,7 @@ public class PressureFilter extends FilterFramework {
 
   private LinkedList<Frame> frameBuffer;
   private double lastValidPressure;
+  private boolean lastFrameReached = false;
 
   class Frame {
     long[] frame = new long[FrameLenght];
@@ -83,7 +84,7 @@ public class PressureFilter extends FilterFramework {
 			}	catch (EndOfStreamException e) {
         try {
           System.out.println("Sending last buffer");
-          sendBuffer(lastValidPressure);
+          sendBuffer(-lastValidPressure);
         } catch(EndOfStreamException ex) {
           System.out.println("\n" + this.getName() + "::Problem sending last buffer::" + ex);
         }
@@ -125,6 +126,10 @@ public class PressureFilter extends FilterFramework {
           } else {
             frameBuffer.add(newFrame);
           }
+
+          if(lastFrameReached) {
+            throw new EndOfStreamException();
+          }
         }
       }
    }
@@ -145,12 +150,18 @@ public class PressureFilter extends FilterFramework {
      frame.saveMeasurement(measurement, id);
 
      while(true) {
-       readId();
-       readMeasurement();
+       try {
+         readId();
+         readMeasurement();
 
-       if(id != 0) {
-         frame.saveMeasurement(measurement, id);
-       } else {
+         if(id != 0) {
+           frame.saveMeasurement(measurement, id);
+         } else {
+           break;
+         }
+       } catch(EndOfStreamException e) {
+         lastFrameReached = true;
+         System.out.println("Last frame reached");
          break;
        }
      }
@@ -163,7 +174,7 @@ public class PressureFilter extends FilterFramework {
      while(frameBuffer.size() > 0) {
        Frame head = frameBuffer.removeFirst();
        double framePressure = Double.longBitsToDouble(head.frame[3]);
-       if(framePressure > 0  && framePressure < 80) {
+       if(framePressure > 50  && framePressure < 80) {
          System.out.println("Sending as last valid pressure: " + lastValidPressure);
          head.saveMeasurement(Double.doubleToLongBits(lastValidPressure), 3);
        } else {

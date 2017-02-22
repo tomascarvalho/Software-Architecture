@@ -56,7 +56,7 @@ public class SinkFilter extends FilterFramework
 		/************************************************************************************
 		 *	File to write the output
 		 *************************************************************************************/
-		File fout = new File("Output.dat");
+		File fout = new File("OutputA.dat");
 		PrintStream output;
 		try
 		{
@@ -172,6 +172,10 @@ public class SinkFilter extends FilterFramework
 					output.format("%s\t%010.5f\t%011.5f\n", TimeStampFormat.format(TimeStamp.getTime()), Double.longBitsToDouble(measurement), altitude_measurement); //Format the output according to the convention, controlling the amount of digits in each measurement
 
 				} // if
+				else if (id == 3)
+				{
+					System.out.println("Isto nao devia chegar aqui");
+				}
 
 
 			} // try

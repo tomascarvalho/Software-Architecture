@@ -1,0 +1,9 @@
+
+Thread-0::Source reading file...
+
+Thread-3::Sink Reading 
+Thread-0::End of file reached...
+
+Thread-0::Read file complete, bytes read::6000 bytes written: 6000
+
+Thread-3::Sink Exiting; bytes read: 4800

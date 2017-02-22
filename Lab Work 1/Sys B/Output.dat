@@ -1,0 +1,1000 @@
+Getting frame...
+
+Thread-0::Source reading file...
+Buffering new frame...
+Wildpoint found
+Getting frame...
+Buffering new frame...
+Getting frame...
+New valid pressure found
+Sending buffer...
+Sending frame...
+Sending id: 0
+Sending id: 1
+Sending long: 4616440642554761029
+Sending id: 2
+Sending long: 4656779175624386748
+Sending id: 3
+Sending long: 4632650526344550017
+Sending id: 4
+Sending long: -4583108496286859308
+Sending id: 5
+Sending long: 4597223461625527024
+Frame sent...
+Sending frame...
+Sending id: 0
+Sending id: 1
+Sending long: 4627126217143424334
+Sending id: 2
+Sending long: 4659118161884045171
+Sending id: 3
+Sending long: 4632650526344550017
+Sending id: 4
+Sending long: -4583129087495174355
+Sending id: 5
+Sending long: 4601504589563228320
+Frame sent...
+Getting frame...
+Buffering new frame...
+Wildpoint found
+Getting frame...
+New valid pressure found
+new pressure: -53.13531801722671
+Sending buffer...
+Sending frame...
+Sending id: 0
+Sending id: 1
+Sending long: 4637906147196311669
+Sending id: 2
+Sending long: 4668383711264065661
+Sending id: 3
+Sending long: 4632699370675860954
+Sending id: 4
+Sending long: -4583233783342055762
+Sending id: 5
+Sending long: 4611775341835243008
+Frame sent...
+Getting frame...
+Buffering new frame...
+Wildpoint found
+Getting frame...
+New valid pressure found
+new pressure: -53.73589184317295
+Sending buffer...
+Sending frame...
+Sending id: 0
+Sending id: 1
+Sending long: 4639273095914890962
+Sending id: 2
+Sending long: 4671179323007180624
+Sending id: 3
+Sending long: 4632819572848221267
+Sending id: 4
+Sending long: -4583529398297323451
+Sending id: 5
+Sending long: 4612439401568784383
+Frame sent...
+Getting frame...
+Buffering new frame...
+Wildpoint found
+Getting frame...
+Buffering new frame...
+Getting frame...
+Buffering new frame...
+Getting frame...
+New valid pressure found
+new pressure: -55.21431173383439
+Sending buffer...
+Sending frame...
+Sending id: 0
+Sending id: 1
+Sending long: 4640622973832535189
+Sending id: 2
+Sending long: 4671864036992511322
+Sending id: 3
+Sending long: 4633115508880153454
+Sending id: 4
+Sending long: -4583972608507579448
+Sending id: 5
+Sending long: 4613531596567799633
+Frame sent...
+Sending frame...
+Sending id: 0
+Sending id: 1
+Sending long: 4641042577875422126
+Sending id: 2
+Sending long: 4673412320895338034
+Sending id: 3
+Sending long: 4633115508880153454
+Sending id: 4
+Sending long: -4584086728869854086
+Sending id: 5
+Sending long: 4614454818930370208
+Frame sent...
+Sending frame...
+Sending id: 0
+Sending id: 1
+Sending long: 4641667411799838298
+Sending id: 2
+Sending long: 4674404176606135608
+Sending id: 3
+Sending long: 4633115508880153454
+Sending id: 4
+Sending long: -4584132307257176787
+Sending id: 5
+Sending long: 4616866563026415579
+Frame sent...
+Getting frame...
+Buffering new frame...
+Sending buffer...
+Sending frame...
+Sending id: 0
+Sending id: 1
+Sending long: 4642441166259608575
+Sending id: 2
+Sending long: 4674802807828462703
+Sending id: 3
+Sending long: 4633126814880514392
+Sending id: 4
+Sending long: -4584204794887688898
+Sending id: 5
+Sending long: 4617703751644396029
+Frame sent...
+Getting frame...
+Buffering new frame...
+Sending buffer...
+Sending frame...
+Sending id: 0
+Sending id: 1
+Sending long: 4643071706338865825
+Sending id: 2
+Sending long: 4675752562404947894
+Sending id: 3
+Sending long: 4633166820407456736
+Sending id: 4
+Sending long: -4584216297350676594
+Sending id: 5
+Sending long: 4617811615315237079
+Frame sent...
+Getting frame...
+Buffering new frame...
+Sending buffer...
+Sending frame...
+Sending id: 0
+Sending id: 1
+Sending long: 4643257640595732204
+Sending id: 2
+Sending long: 4676267554948834284
+Sending id: 3
+Sending long: 4633182256161426267
+Sending id: 4
+Sending long: -4584245080113526802
+Sending id: 5
+Sending long: 4618427492568659866
+Frame sent...
+Getting frame...
+Buffering new frame...
+Sending buffer...
+Sending frame...
+Sending id: 0
+Sending id: 1
+Sending long: 4644347815508806413
+Sending id: 2
+Sending long: 4676441805729586073
+Sending id: 3
+Sending long: 4633553046880570642
+Sending id: 4
+Sending long: -4584576555129765390
+Sending id: 5
+Sending long: 4618901880019004904
+Frame sent...
+Getting frame...
+Buffering new frame...
+Sending buffer...
+Sending frame...
+Sending id: 0
+Sending id: 1
+Sending long: 4644972184746797171
+Sending id: 2
+Sending long: 4676522046340406716
+Sending id: 3
+Sending long: 4633760850050730330
+Sending id: 4
+Sending long: -4584766886140308456
+Sending id: 5
+Sending long: 4619293387166459679
+Frame sent...
+Getting frame...
+Buffering new frame...
+Sending buffer...
+Sending frame...
+Sending id: 0
+Sending id: 1
+Sending long: 4645603335567950683
+Sending id: 2
+Sending long: 4676701795165606511
+Sending id: 3
+Sending long: 4633950049421812517
+Sending id: 4
+Sending long: -4585002676763256784
+Sending id: 5
+Sending long: 4620445302325626129
+Frame sent...
+Getting frame...
+Buffering new frame...
+Sending buffer...
+Sending frame...
+Sending id: 0
+Sending id: 1
+Sending long: 4645649496905127157
+Sending id: 2
+Sending long: 4676962041709801694
+Sending id: 3
+Sending long: 4634060276156681736
+Sending id: 4
+Sending long: -4585047014002749964
+Sending id: 5
+Sending long: 4621015960287108100
+Frame sent...
+Getting frame...
+Buffering new frame...
+Sending buffer...
+Sending frame...
+Sending id: 0
+Sending id: 1
+Sending long: 4646092358263305150
+Sending id: 2
+Sending long: 4677079656464488037
+Sending id: 3
+Sending long: 4634132449486886580
+Sending id: 4
+Sending long: -4585500747412903804
+Sending id: 5
+Sending long: 4621091707872133181
+Frame sent...
+Getting frame...
+
+Thread-2::Sink Writing to file...
+
+Thread-2::Sink Reading ID: 0
+ID: 841420613
+ID: -796448580
+ID: -548727167
+ID: -541114412
+ID: -1756890384
+ID: 1077336775
+ID: 1084785480
+ID: 1078623003
+ID: -1067092896
+ID: 1071371275
+ID: 1
+ID: 2
+ID: 3
+3 1970:03:04:04:36:56	53.30885
+ID: 4
+ID: 5
+ID: 0
+ID: 34121426
+ID: 1711152976
+ID: 337140819
+ID: -51537851
+ID: -1366962177
+ID: 1080479233
+ID: 1087753110
+ID: 1078731266
+ID: -1067289293
+ID: 1074171531
+ID: 1
+ID: 2
+ID: 3
+3 1970:03:04:06:05:32	56.26569
+ID: 4
+ID: 5
+ID: 0
+ID: 500567642
+ID: 590742840
+ID: 237476718
+ID: 1317752109
+ID: -2003734565
+ID: 1080902564
+ID: 1088437346
+ID: 1078733898
+ID: -1067343354
+ID: 1075142936
+ID: 1
+ID: 2
+ID: 3
+3 1970:03:04:06:14:49	56.63028
+ID: 4
+ID: 5
+ID: 0
+ID: 475248364
+ID: -1217862676
+ID: -567997605
+ID: 1417693166
+ID: -1015810150
+ID: 1081346491
+ID: 1088818955
+ID: 1078833138
+ID: -1067429911
+ID: 1075421897
+ID: 1
+ID: 2
+ID: 3
+3 1970:03:04:06:20:59	60.85111
+ID: 4
+ID: 5
+ID: 0
+ID: -941243557
+ID: 625414767
+ID: -1431248091
+ID: -1655728080
+ID: -1254243055
+ID: 1081649562
+ID: 1088940082
+ID: 1078951236
+ID: -1067539448
+ID: 1075914120
+ID: 1
+ID: 2
+ID: 3
+3 1970:03:04:06:30:06	63.49149
+ID: 4
+ID: 5
+Buffering new frame...
+Sending buffer...
+Sending frame...
+Sending id: 0
+Sending id: 1
+Sending long: 4646769331040979552
+Sending id: 2
+Sending long: 4677422255017870397
+Sending id: 3
+Sending long: 4634260217525409497
+Sending id: 4
+Sending long: -4585978014577677092
+Sending id: 5
+Sending long: 4621219326146699138
+Frame sent...
+Getting frame...
+Buffering new frame...
+Sending buffer...
+Sending frame...
+Sending id: 0
+Sending id: 1
+Sending long: 4646956797241540165
+Sending id: 2
+Sending long: 4677522247197011362
+Sending id: 3
+Sending long: 4634323946655734966
+Sending id: 4
+Sending long: -4586326179849647462
+Sending id: 5
+Sending long: 4621381517628349481
+Frame sent...
+Getting frame...
+Buffering new frame...
+Sending buffer...
+Sending frame...
+Sending id: 0
+Sending id: 1
+Sending long: 4647279798308229118
+Sending id: 2
+Sending long: 4677942234567496047
+Sending id: 3
+Sending long: 4634353979789841997
+Sending id: 4
+Sending long: -4586398167385371474
+Sending id: 5
+Sending long: 4621547969749469562
+Frame sent...
+Getting frame...
+Buffering new frame...
+Sending buffer...
+Sending frame...
+Sending id: 0
+Sending id: 1
+Sending long: 4647533891685321150
+Sending id: 2
+Sending long: 4678560665014834152
+Sending id: 3
+Sending long: 4634469375400308794
+Sending id: 4
+Sending long: -4586618919500759344
+Sending id: 5
+Sending long: 4621863532362911500
+Frame sent...
+Getting frame...
+Buffering new frame...
+Sending buffer...
+Sending frame...
+Sending id: 0
+Sending id: 1
+Sending long: 4647683400492587819
+Sending id: 2
+Sending long: 4678946432914523555
+Sending id: 3
+Sending long: 4634499794107281450
+Sending id: 4
+Sending long: -4586744083578079806
+Sending id: 5
+Sending long: 4622086526003736206
+Frame sent...
+Getting frame...
+Buffering new frame...
+Sending buffer...
+Sending frame...
+Sending id: 0
+Sending id: 1
+Sending long: 4647781124887059387
+Sending id: 2
+Sending long: 4679328140516414925
+Sending id: 3
+Sending long: 4634515217450796450
+Sending id: 4
+Sending long: -4587165804009345426
+Sending id: 5
+Sending long: 4622234948624596144
+Frame sent...
+Getting frame...
+Buffering new frame...
+Sending buffer...
+Sending frame...
+Sending id: 0
+Sending id: 1
+Sending long: 4647787213794139467
+Sending id: 2
+Sending long: 4679366819642630691
+Sending id: 3
+Sending long: 4634516604969592388
+Sending id: 4
+Sending long: -4587264822572457786
+Sending id: 5
+Sending long: 4622575635738947025
+Frame sent...
+Getting frame...
+Buffering new frame...
+Sending buffer...
+Sending frame...
+Sending id: 0
+Sending id: 1
+Sending long: 4648013478797224847
+Sending id: 2
+Sending long: 4679531554186093824
+Sending id: 3
+Sending long: 4634552272527059185
+Sending id: 4
+Sending long: -4587866211731319804
+Sending id: 5
+Sending long: 4622656643099736294
+Frame sent...
+Getting frame...
+Buffering new frame...
+Sending buffer...
+Sending frame...
+Sending id: 0
+Sending id: 1
+Sending long: 4648017259001849632
+Sending id: 2
+Sending long: 4679580446403797129
+Sending id: 3
+Sending long: 4634589150626853950
+Sending id: 4
+Sending long: -4588359994642922240
+Sending id: 5
+Sending long: 4623175113057371156
+Frame sent...
+Getting frame...
+Buffering new frame...
+Sending buffer...
+Sending frame...
+Sending id: 0
+Sending id: 1
+Sending long: 4648172606791828161
+Sending id: 2
+Sending long: 4679666677698870516
+Sending id: 3
+Sending long: 4634593460143837779
+Sending id: 4
+Sending long: -4589151585615515014
+Sending id: 5
+Sending long: 4623391758132548662
+Frame sent...
+Getting frame...
+Buffering new frame...
+Sending buffer...
+Sending frame...
+Sending id: 0
+Sending id: 1
+Sending long: 4648761533121105730
+Sending id: 2
+Sending long: 4679694797830012708
+Sending id: 3
+Sending long: 4634599034946848091
+Sending id: 4
+Sending long: -4590210318608935400
+Sending id: 5
+Sending long: 4623726927318569806
+Frame sent...
+Getting frame...
+Buffering new frame...
+Sending buffer...
+Sending frame...
+Sending id: 0
+Sending id: 1
+Sending long: 4648955389728861669
+Sending id: 2
+Sending long: 4679830799889376134
+Sending id: 3
+Sending long: 4634710186684200435
+Sending id: 4
+Sending long: -4590466298587536268
+Sending id: 5
+Sending long: 4624048589240751938
+Frame sent...
+Getting frame...
+Buffering new frame...
+Sending buffer...
+Sending frame...
+Sending id: 0
+Sending id: 1
+Sending long: 4649170864044867631
+Sending id: 2
+Sending long: 4680017232375615700
+Sending id: 3
+Sending long: 4634780075267262310
+Sending id: 4
+Sending long: -4591343350884195112
+Sending id: 5
+Sending long: 4624776457054410006
+Frame sent...
+Getting frame...
+Buffering new frame...
+Sending buffer...
+Sending frame...
+Sending id: 0
+Sending id: 1
+Sending long: 4649221909692863405
+Sending id: 2
+Sending long: 4680194471988957043
+Sending id: 3
+Sending long: 4634839034163028716
+Sending id: 4
+Sending long: -4591644444656192148
+Sending id: 5
+Sending long: 4624918229200372912
+Frame sent...
+Getting frame...
+ID: 0
+ID: 1105234528
+ID: 1188611133
+ID: 1314100953
+ID: 358132956
+ID: 740614018
+ID: 1081953942
+ID: 1089070515
+ID: 1079012627
+ID: -1067837277
+ID: 1075999233
+ID: 1
+ID: 2
+ID: 3
+3 1970:03:04:06:34:37	66.13111
+ID: 4
+ID: 5
+ID: 0
+ID: 1736313278
+ID: 38999016
+ID: -1423347654
+ID: -955105584
+ID: 517132044
+ID: 1082123117
+ID: 1089402109
+ID: 1079053570
+ID: -1067934578
+ID: 1076163380
+ID: 1
+ID: 2
+ID: 3
+3 1970:03:04:06:37:35	68.42243
+ID: 4
+ID: 5
+ID: 0
+ID: -1915921077
+ID: -2104729053
+ID: 685549124
+ID: -1075027770
+ID: -1684509231
+ID: 1082199969
+ID: 1089538343
+ID: 1079065788
+ID: -1068195844
+ID: 1076296121
+ID: 1
+ID: 2
+ID: 3
+3 1970:03:04:06:38:34	69.47308
+ID: 4
+ID: 5
+ID: 0
+ID: -628669759
+ID: -1485226764
+ID: 1714999891
+ID: 2130145914
+ID: -386558922
+ID: 1082374139
+ID: 1089576351
+ID: 1079076676
+ID: -1068741623
+ID: 1076545316
+ID: 1
+ID: 2
+ID: 3
+3 1970:03:04:06:40:04	71.19311
+ID: 4
+ID: 5
+ID: 0
+ID: -1149403089
+ID: -2039181100
+ID: 509413222
+ID: 1622287576
+ID: 1079072022
+ID: 1082481329
+ID: 1089692691
+ID: 1079132555
+ID: -1069075532
+ID: 1076822688
+Buffering new frame...
+Sending buffer...
+Sending frame...
+Sending id: 0
+Sending id: 1
+Sending long: 4649261595301798202
+Sending id: 2
+Sending long: 4680211791223134067
+Sending id: 3
+Sending long: 4634839325157493482
+Sending id: 4
+Sending long: -4592310675809331816
+Sending id: 5
+Sending long: 4624992799280749544
+Frame sent...
+Getting frame...
+Buffering new frame...
+Sending buffer...
+Sending frame...
+Sending id: 0
+Sending id: 1
+Sending long: 4649502540765762364
+Sending id: 2
+Sending long: 4680303896935223257
+Sending id: 3
+Sending long: 4634922871848483482
+Sending id: 4
+Sending long: -4592770832801843292
+Sending id: 5
+Sending long: 4625041642232754081
+Frame sent...
+Getting frame...
+Buffering new frame...
+Sending buffer...
+Sending frame...
+Sending id: 0
+Sending id: 1
+Sending long: 4649605151456621722
+Sending id: 2
+Sending long: 4680412567460200837
+Sending id: 3
+Sending long: 4634964526070300435
+Sending id: 4
+Sending long: -4592976248765544140
+Sending id: 5
+Sending long: 4625070170886168344
+Frame sent...
+Getting frame...
+Buffering new frame...
+Sending buffer...
+Sending frame...
+Sending id: 0
+Sending id: 1
+Sending long: 4649717733188745308
+Sending id: 2
+Sending long: 4680671532316637234
+Sending id: 3
+Sending long: 4634967425345569576
+Sending id: 4
+Sending long: -4593422330764268720
+Sending id: 5
+Sending long: 4625174997352501256
+Frame sent...
+Getting frame...
+Buffering new frame...
+Sending buffer...
+Sending frame...
+Sending id: 0
+Sending id: 1
+Sending long: 4649755585331978122
+Sending id: 2
+Sending long: 4680694018850113959
+Sending id: 3
+Sending long: 4634988170754051060
+Sending id: 4
+Sending long: -4595809803435329832
+Sending id: 5
+Sending long: 4625295792251628058
+Frame sent...
+Getting frame...
+Buffering new frame...
+Sending buffer...
+Sending frame...
+Sending id: 0
+Sending id: 1
+Sending long: 4649788338594654693
+Sending id: 2
+Sending long: 4680703005149323096
+Sending id: 3
+Sending long: 4634995868540135435
+Sending id: 4
+Sending long: -4603660929204536304
+Sending id: 5
+Sending long: 4625499254459619902
+Frame sent...
+Getting frame...
+Buffering new frame...
+Sending buffer...
+Sending frame...
+Sending id: 0
+Sending id: 1
+Sending long: 4650064641576658647
+Sending id: 2
+Sending long: 4680714763749892853
+Sending id: 3
+Sending long: 4635032703196973482
+Sending id: 4
+Sending long: -4603999960568459248
+Sending id: 5
+Sending long: 4625520650499463671
+Frame sent...
+Getting frame...
+Buffering new frame...
+Sending buffer...
+Sending frame...
+Sending id: 0
+Sending id: 1
+Sending long: 4650297197484602603
+Sending id: 2
+Sending long: 4680759636110660683
+Sending id: 3
+Sending long: 4635054480367123326
+Sending id: 4
+Sending long: -4609663168816657376
+Sending id: 5
+Sending long: 4625530686088089840
+Frame sent...
+Getting frame...
+Buffering new frame...
+Sending buffer...
+Sending frame...
+Sending id: 0
+Sending id: 1
+Sending long: 4650323292698013067
+Sending id: 2
+Sending long: 4680795244225756543
+Sending id: 3
+Sending long: 4635071677433118326
+Sending id: 4
+Sending long: 4618579396286904544
+Sending id: 5
+Sending long: 4625592174158173605
+Frame sent...
+Getting frame...
+Buffering new frame...
+Sending buffer...
+Sending frame...
+Sending id: 0
+Sending id: 1
+Sending long: 4650362087025014800
+Sending id: 2
+Sending long: 4680884400758783604
+Sending id: 3
+Sending long: 4635119392715334263
+Sending id: 4
+Sending long: 4626380168938244440
+Sending id: 5
+Sending long: 4625593564044773505
+Frame sent...
+Getting frame...
+Buffering new frame...
+Sending buffer...
+Sending frame...
+Sending id: 0
+Sending id: 1
+Sending long: 4650577540096468074
+Sending id: 2
+Sending long: 4680989872131611970
+Sending id: 3
+Sending long: 4635138713987141607
+Sending id: 4
+Sending long: 4627991979553488252
+Sending id: 5
+Sending long: 4625612314428036855
+Frame sent...
+Getting frame...
+Buffering new frame...
+Sending buffer...
+Sending frame...
+Sending id: 0
+Sending id: 1
+Sending long: 4650730566992344836
+Sending id: 2
+Sending long: 4681230658735546102
+Sending id: 3
+Sending long: 4635224651149425200
+Sending id: 4
+Sending long: 4628133036740691028
+Sending id: 5
+Sending long: 4625613654809010849
+Frame sent...
+Getting frame...
+Buffering new frame...
+Sending buffer...
+Sending frame...
+Sending id: 0
+Sending id: 1
+Sending long: 4650999521054455496
+Sending id: 2
+Sending long: 4681235874269439502
+Sending id: 3
+Sending long: 4635243898019733404
+Sending id: 4
+Sending long: 4630912082950031679
+Sending id: 5
+Sending long: 4625775297297333643
+Frame sent...
+Getting frame...
+Buffering new frame...
+Sending buffer...
+Sending frame...
+Sending id: 0
+Sending id: 1
+Sending long: 4651055345161493675
+Sending id: 2
+Sending long: 4681461607919348984
+Sending id: 3
+Sending long: 4635286043559047466
+Sending id: 4
+Sending long: 4631311684385718848
+Sending id: 5
+Sending long: 4626013600209559734
+Frame sent...
+Getting frame...
+ID: 1
+ID: 2
+ID: 3
+3 1970:03:04:06:43:56	73.02828
+ID: 4
+ID: 5
+ID: 0
+ID: 1017025340
+ID: -776777767
+ID: -1982023014
+ID: -669894748
+ID: 2091659169
+ID: 1082570560
+ID: 1089743470
+ID: 1079161773
+ID: -1069385617
+ID: 1076858064
+ID: 1
+ID: 2
+ID: 3
+3 1970:03:04:06:45:13	74.84869
+ID: 4
+ID: 5
+ID: 0
+ID: -1004937334
+ID: 668682663
+ID: 535743476
+ID: 1526380248
+ID: 1715759642
+ID: 1082613211
+ID: 1089811093
+ID: 1079169071
+ID: -1071873338
+ID: 1076957968
+ID: 1
+ID: 2
+ID: 3
+3 1970:03:04:06:46:12	75.77635
+ID: 4
+ID: 5
+ID: 0
+ID: -1408207637
+ID: -581118901
+ID: 148732798
+ID: 1618693152
+ID: -504164112
+ID: 1082737765
+ID: 1089832569
+ID: 1079186722
+ID: 1075346813
+ID: 1076979603
+ID: 1
+ID: 2
+ID: 3
+3 1970:03:04:06:48:18	77.00828
+ID: 4
+ID: 5
+ID: 0
+ID: 98313322
+ID: -577036990
+ID: 870141927
+ID: 1822719356
+ID: 1982322423
+ID: 1082832591
+ID: 1089933947
+ID: 1079222339
+ID: 1077571193
+ID: 1076984604
+ID: 1
+ID: 2
+ID: 3
+3 1970:03:04:06:49:24	78.77760
+ID: 4
+ID: 5
+ID: 0
+ID: -1358406485
+ID: 1772711160
+ID: 178893098
+ID: 1877819968
+ID: 379445430
+
+Thread-0::End of file reached...
+
+Thread-0::Read file complete, bytes read::3600 bytes written: 3600
+Buffering new frame...
+Sending buffer...
+Sending frame...
+Sending id: 0
+Sending id: 1
+Sending long: 4651108997442952980
+Sending id: 2
+Sending long: 4681497904405978011
+Sending id: 3
+Sending long: 4635294491025190747
+Sending id: 4
+Sending long: 4631432463332506523
+Sending id: 5
+Sending long: 4626209967667629480
+Frame sent...
+Getting frame...
+Buffering new frame...
+Sending buffer...
+Sending frame...
+Sending id: 0
+Sending id: 1
+Sending long: 4651383938354251711
+Sending id: 2
+Sending long: 4681543401549725083
+Sending id: 3
+Sending long: 4635299948014807154
+Sending id: 4
+Sending long: 4634496461749546528
+Sending id: 5
+Sending long: 4626210298046875058
+Frame sent...
+Getting frame...
+Sending buffer...
+ID: 1082920701
+ID: 1089996170
+ID: 1079238599
+ID: 1078339401
+ID: 1077123444
+ID: 1
+ID: 2
+ID: 3
+3 1970:03:04:06:51:15	79.57412
+ID: 4
+ID: 5
+
+Thread-2::Write file complete, bytes read::2880 bytes written: 2880

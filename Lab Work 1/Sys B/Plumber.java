@@ -46,14 +46,16 @@ public class Plumber
 		****************************************************************************/
 
 
-	SourceFilter            source = new SourceFilter();	// This is a source filter - see SourceFilterTemplate.java
+		SourceFilter            source = new SourceFilter();	// This is a source filter - see SourceFilterTemplate.java
     AltitudeFilter          altitudeFilter = new AltitudeFilter();
     TemperatureFilter       temperatureFilter = new TemperatureFilter();
-	PressureFilter          pressureFilter = new PressureFilter();	// This is a standard filter - see FilterTemplate.java
+		PressureFilter          pressureFilter = new PressureFilter();	// This is a standard filter - see FilterTemplate.java
     PressureWildpointFilter pressureWildpointFilter = new PressureWildpointFilter();
-	WildpointSinkFilter     wildpointSinkFilter = new WildpointSinkFilter();		// This is a sink filter - see SinkFilterTemplate.java
+		WildpointSinkFilter     wildpointSinkFilter = new WildpointSinkFilter();		// This is a sink filter - see SinkFilterTemplate.java
     SinkFilter              sinkFilter = new SinkFilter();
     MiddleFilter            middleFilter = new MiddleFilter();
+    RemovePitchFilter       removePitchFilter = new RemovePitchFilter();
+    RemoveVelocityFilter    removeVelocityFilter = new RemoveVelocityFilter();
 
 
 		/****************************************************************************
@@ -73,7 +75,11 @@ public class Plumber
     middleFilter.ConnectA(temperatureFilter);
     temperatureFilter.ConnectA(altitudeFilter);
 
-    altitudeFilter.ConnectA(source);
+    altitudeFilter.ConnectA(removePitchFilter);
+
+    removePitchFilter.ConnectA(removeVelocityFilter);
+
+    removeVelocityFilter.ConnectA(source);
 
 		/****************************************************************************
 		* Here we start the filters up.
@@ -81,6 +87,9 @@ public class Plumber
 
 
 		source.start();
+
+    removeVelocityFilter.start();
+    removePitchFilter.start();
 
     altitudeFilter.start();
     temperatureFilter.start();

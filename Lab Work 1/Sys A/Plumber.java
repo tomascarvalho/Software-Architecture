@@ -20,7 +20,7 @@
 ******************************************************************************************************************/
 public class Plumber
 {
-   public static void main( String argv[])
+   public static void main(String argv[])
    {
 		/****************************************************************************
 		* Here we instantiate three filters.

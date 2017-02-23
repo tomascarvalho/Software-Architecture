@@ -56,7 +56,7 @@ public class WildpointSinkFilter extends FilterFramework {
 
     try {
       out = new PrintStream(new FileOutputStream(fileName));
-      System.out.println("\n" + this.getName() + "::Sink Writing to file..." );
+      System.out.println("\n" + this.getName() + "::Sink Writing to " + fileName);
     } catch (FileNotFoundException e) {
       ClosePorts();
       System.out.println("\n" + this.getName() + "::Problem opening output data file::" + e);
@@ -78,8 +78,6 @@ public class WildpointSinkFilter extends FilterFramework {
 				****************************************************************************/
 
 				readId();
-
-        System.out.println("ID: " + id);
 
 				/****************************************************************************
 				// Here we read measurements. All measurement data is read as a stream of bytes
@@ -124,8 +122,8 @@ public class WildpointSinkFilter extends FilterFramework {
 
 				if ( id == 3 )
 				{
-          out.format("%d %s\t%2.5f\n", id, TimeStampFormat.format(TimeStamp.getTime()), Double.longBitsToDouble(measurement));
-					System.out.format("%d %s\t%2.5f\n", id, TimeStampFormat.format(TimeStamp.getTime()), Double.longBitsToDouble(measurement));
+          out.format("%s\t%2.5f\n", TimeStampFormat.format(TimeStamp.getTime()), Double.longBitsToDouble(measurement));
+					System.out.format("%s\t%2.5f\n", TimeStampFormat.format(TimeStamp.getTime()), Double.longBitsToDouble(measurement));
 
 				} // if
 

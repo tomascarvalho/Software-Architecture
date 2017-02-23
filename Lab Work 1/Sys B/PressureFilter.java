@@ -47,6 +47,7 @@ public class PressureFilter extends FilterFramework {
 
   private LinkedList<Frame> frameBuffer;
   private double lastValidPressure;
+  private boolean lastFrameReached = false;
 
   class Frame {
     long[] frame = new long[FrameLenght];
@@ -56,16 +57,15 @@ public class PressureFilter extends FilterFramework {
     }
 
     public void send() throws EndOfStreamException {
-      System.out.println("Sending frame...");
       for(i = 0; i < FrameLenght; i++) {
-        if(i == 0) {
-          sendIdByteBuffer(i);
-        } else {
+        // if(i == 0) {
           sendIdByteBuffer(i);
           sendMeasurementByteBuffer(frame[i]);
-        }
+        // } else {
+        //   sendIdByteBuffer(i);
+        //   sendMeasurementByteBuffer(frame[i]);
+        // }
       }
-      System.out.println("Frame sent...");
     }
   }
 
@@ -83,7 +83,8 @@ public class PressureFilter extends FilterFramework {
         isFirstFrame = false;
 			}	catch (EndOfStreamException e) {
         try {
-          sendBuffer();
+          System.out.println("Sending last buffer");
+          sendBuffer(-lastValidPressure);
         } catch(EndOfStreamException ex) {
           System.out.println("\n" + this.getName() + "::Problem sending last buffer::" + ex);
         }
@@ -94,43 +95,51 @@ public class PressureFilter extends FilterFramework {
   }
 
    private void filter(Frame frame, boolean isFirstFrame) throws EndOfStreamException {
-      System.out.println("Buffering new frame...");
       frameBuffer.add(frame);
       double pressure = Double.longBitsToDouble(frame.frame[3]);
+      System.out.println("Read: " + pressure);
       if(pressure > 50 && pressure < 80) {
         lastValidPressure = pressure;
-        sendBuffer();
+        System.out.println("New last valid pressure " + lastValidPressure);
+        sendBuffer(lastValidPressure);
       } else {
-        System.out.println("Wildpoint found");
         while(true) {
           Frame newFrame = getFrame(false);
 
           double newPressure = Double.longBitsToDouble(newFrame.frame[3]);
+          System.out.println("Read while buffering: " + newPressure);
           if(newPressure > 50 && newPressure < 80) {
-            System.out.println("New valid pressure found");
             if(isFirstFrame) {
-              pressure = newPressure;
+              pressure = -newPressure;
+              System.out.println("New transformed value " + pressure);
+              //frame.frame[3] = Double.doubleToLongBits(pressure);
             } else {
               pressure = -interpolateValues(lastValidPressure, newPressure);
-              System.out.println("new pressure: " + pressure);
-              frame.frame[3] = Double.doubleToLongBits(pressure);
+              System.out.println("New interpolated value " + pressure);
+              //frame.frame[3] = Double.doubleToLongBits(pressure);
             }
             lastValidPressure = newPressure;
-            sendBuffer();
+            System.out.println("New last valid pressure " + lastValidPressure);
+            frameBuffer.add(newFrame);
+            sendBuffer(pressure);
             break;
+          } else {
+            frameBuffer.add(newFrame);
           }
-          System.out.println("Buffering new frame...");
-          frameBuffer.add(newFrame);
+
+          if(lastFrameReached) {
+            throw new EndOfStreamException();
+          }
         }
       }
    }
 
    private double interpolateValues(double val1, double val2) {
+     System.out.println("Interpolation: " + val1 + " " + val2);
      return (val1 + val2) / 2;
    }
 
    private Frame getFrame(boolean isFirstFrame) throws EndOfStreamException {
-     System.out.println("Getting frame...");
      Frame frame = new Frame();
 
      if(isFirstFrame) { //Read id 0
@@ -138,13 +147,21 @@ public class PressureFilter extends FilterFramework {
        readMeasurement();
      }
 
-     while(true) {
-       readId();
-       readMeasurement();
+     frame.saveMeasurement(measurement, id);
 
-       if(id != 0) {
-         frame.saveMeasurement(measurement, id);
-       } else {
+     while(true) {
+       try {
+         readId();
+         readMeasurement();
+
+         if(id != 0) {
+           frame.saveMeasurement(measurement, id);
+         } else {
+           break;
+         }
+       } catch(EndOfStreamException e) {
+         lastFrameReached = true;
+         System.out.println("Last frame reached");
          break;
        }
      }
@@ -152,18 +169,24 @@ public class PressureFilter extends FilterFramework {
      return frame;
    }
 
-   private void sendBuffer() throws EndOfStreamException {
-     System.out.println("Sending buffer...");
+   private void sendBuffer(double interpolatedValue) throws EndOfStreamException {
+
      while(frameBuffer.size() > 0) {
        Frame head = frameBuffer.removeFirst();
-
-       head.saveMeasurement(Double.doubleToLongBits(lastValidPressure), 3);
+       double framePressure = Double.longBitsToDouble(head.frame[3]);
+       if(framePressure > 50  && framePressure < 80) {
+         System.out.println("Sending as last valid pressure: " + lastValidPressure);
+         head.saveMeasurement(Double.doubleToLongBits(lastValidPressure), 3);
+       } else {
+         System.out.println("Sending as interpolated value: " + interpolatedValue);
+         head.saveMeasurement(Double.doubleToLongBits(interpolatedValue), 3);
+       }
        head.send();
+       System.out.println("\n");
      }
    }
 
    private void sendIdByteBuffer(int idToSend) throws EndOfStreamException {
-     System.out.println("Sending id: " + idToSend);
      byteBuffer = ByteBuffer.allocate(IdLength).putInt(idToSend).array();
      for (byte b : byteBuffer) {
        WriteFilterOutputPort(b);
@@ -171,7 +194,6 @@ public class PressureFilter extends FilterFramework {
    }
 
    private void sendMeasurementByteBuffer(long measurementToSend) throws EndOfStreamException {
-     System.out.println("Sending long: " + measurementToSend);
      byteBuffer = ByteBuffer.allocate(MeasurementLength).putLong(measurementToSend).array();
      for (byte b : byteBuffer) {
        WriteFilterOutputPort(b);

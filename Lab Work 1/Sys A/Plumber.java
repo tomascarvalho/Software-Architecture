@@ -30,6 +30,7 @@ public class Plumber
         AltitudeFilter Filter2 = new AltitudeFilter();
 		TemperatureFilter Filter3 = new TemperatureFilter();
 		SinkFilter Filter4 = new SinkFilter();
+	   	RemovePressureFilter Filter5 = new RemovePressureFilter();
 
 		/****************************************************************************
 		* Here we connect the filters starting with the sink filter (Filter 1) which
@@ -38,16 +39,20 @@ public class Plumber
 		****************************************************************************/
         Filter4.Connect(Filter3); // This essentially says, "connect Filter4 input port to Filter3 output port"
 		Filter3.Connect(Filter2); // This essentially says, "connect Filter3 input port to Filter2 output port
-		Filter2.Connect(Filter1); // This essentially says, "connect Filter2 intput port to Filter1 output port
+	   	Filter2.Connect(Filter5);
+	    //Filter2.Connect(Filter1); // This essentially says, "connect Filter2 intput port to Filter1 output port
+		Filter5.Connect(Filter1); // This essentially says, "connect Filter2 intput port to Filter1 output port
 
 		/****************************************************************************
 		* Here we start the filters up. All-in-all,... its really kind of boring.
 		****************************************************************************/
 
 		Filter1.start();
+	   	Filter5.start();
 		Filter2.start();
 		Filter3.start();
         Filter4.start();
+
 
    } // main
 

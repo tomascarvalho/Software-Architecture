@@ -66,9 +66,13 @@ public class PressureWildpointFilter extends FilterFramework {
      // If is pressure id
      if(id == 3) {
        doubleMeasurement = Double.longBitsToDouble(measurement);
-       if(doubleMeasurement > 50 && doubleMeasurement < 80) {
+      //  System.out.println("PressureWildpointFilter value = " + doubleMeasurement);
+       if(doubleMeasurement <= 50 || doubleMeasurement >= 80) {
+        //  System.out.println("PressureWildpointFilter: Invalid Pressure");
          sendIdByteBuffer();
          sendMeasurementByteBuffer();
+       } else {
+        //  System.out.println("PressureWildpointFilter: valid Pressure");
        }
      }
    }

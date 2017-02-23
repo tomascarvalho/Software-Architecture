@@ -54,6 +54,8 @@ public class Plumber
 		WildpointSinkFilter     wildpointSinkFilter = new WildpointSinkFilter();		// This is a sink filter - see SinkFilterTemplate.java
     SinkFilter              sinkFilter = new SinkFilter();
     MiddleFilter            middleFilter = new MiddleFilter();
+    RemovePitchFilter       removePitchFilter = new RemovePitchFilter();
+    RemoveVelocityFilter    removeVelocityFilter = new RemoveVelocityFilter();
 
 
 		/****************************************************************************
@@ -73,7 +75,11 @@ public class Plumber
     middleFilter.ConnectA(temperatureFilter);
     temperatureFilter.ConnectA(altitudeFilter);
 
-    altitudeFilter.ConnectA(source);
+    altitudeFilter.ConnectA(removePitchFilter);
+
+    removePitchFilter.ConnectA(removeVelocityFilter);
+
+    removeVelocityFilter.ConnectA(source);
 
 		/****************************************************************************
 		* Here we start the filters up.
@@ -81,6 +87,9 @@ public class Plumber
 
 
 		source.start();
+
+    removeVelocityFilter.start();
+    removePitchFilter.start();
 
     altitudeFilter.start();
     temperatureFilter.start();

@@ -32,18 +32,10 @@ import java.util.*;
 
 public class PressureFilter extends FilterFramework {
 
-  private int MeasurementLength = 8;		// This is the length of all measurements (including time) in bytes
-  private int IdLength = 4;				// This is the length of IDs in the byte stream
   private int FrameLenght = 6;
 
-  private long measurement;				// This is the word used to store all measurements - conversions are illustrated.
-  private int id;							// This is the measurement id
   private double doubleMeasurement;
 
-  private int i;
-  private byte databyte;
-
-  private byte[] byteBuffer;
 
   private LinkedList<Frame> frameBuffer;
   private double lastValidPressure;
@@ -58,13 +50,8 @@ public class PressureFilter extends FilterFramework {
 
     public void send() throws EndOfStreamException {
       for(i = 0; i < FrameLenght; i++) {
-        // if(i == 0) {
-          sendIdByteBuffer(i);
-          sendMeasurementByteBuffer(frame[i]);
-        // } else {
-        //   sendIdByteBuffer(i);
-        //   sendMeasurementByteBuffer(frame[i]);
-        // }
+        sendIdByteBuffer(i);
+        sendMeasurementByteBuffer(frame[i]);
       }
     }
   }
@@ -185,56 +172,4 @@ public class PressureFilter extends FilterFramework {
        System.out.println("\n");
      }
    }
-
-   private void sendIdByteBuffer(int idToSend) throws EndOfStreamException {
-     byteBuffer = ByteBuffer.allocate(IdLength).putInt(idToSend).array();
-     for (byte b : byteBuffer) {
-       WriteFilterOutputPort(b);
-     }
-   }
-
-   private void sendMeasurementByteBuffer(long measurementToSend) throws EndOfStreamException {
-     byteBuffer = ByteBuffer.allocate(MeasurementLength).putLong(measurementToSend).array();
-     for (byte b : byteBuffer) {
-       WriteFilterOutputPort(b);
-     }
-   }
-
-   private void readId() throws EndOfStreamException {
-     id = 0;
-     for (i=0; i<IdLength; i++ ) {
-       databyte = ReadFilterInputPort();
-
-       id = id | (databyte & 0xFF);
-
-       if (i != IdLength-1) {
-         id = id << 8;
-       }
-     }
-   }
-
-   private void readMeasurement() throws EndOfStreamException {
-     measurement = 0;
-     for (i = 0; i < MeasurementLength; i++) {
-       databyte = ReadFilterInputPort();
-       measurement = measurement | (databyte & 0xFF);
-
-       if (i != MeasurementLength-1) {
-         measurement = measurement << 8;
-       }
-     }
-   }
-
-  //  private long readMeasurement(byte[] input) throws EndOfStreamException {
-  //    long newMeasurement = 0;
-  //    for (i = 0; i < MeasurementLength; i++) {
-  //      databyte = input[i];
-  //      newMeasurement = newMeasurement | (databyte & 0xFF);
-   //
-  //      if (i != MeasurementLength-1) {
-  //        newMeasurement = newMeasurement << 8;
-  //      }
-  //    }
-  //    return newMeasurement;
-  //  }
 }

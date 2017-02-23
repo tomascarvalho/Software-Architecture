@@ -29,17 +29,10 @@ import java.text.SimpleDateFormat;		// This class is used to format and write ti
 
 public class SinkFilter extends FilterFramework {
 
-  int MeasurementLength = 8;		// This is the length of all measurements (including time) in bytes
-  int IdLength = 4;				// This is the length of IDs in the byte stream
-
-  byte databyte = 0;				// This is the data byte read from the stream
   int bytesread = 0;				// This is the number of bytes read from the stream
   int byteswritten = 0;
 
-  long measurement;				// This is the word used to store all measurements - conversions are illustrated.
   double temperature, level, pressure;
-  int id;							// This is the measurement id
-  int i;							// This is a loop counter
 
 	public void run()
     {
@@ -122,35 +115,4 @@ public class SinkFilter extends FilterFramework {
 		} // while
 
    } // run
-
-   private void readId() throws EndOfStreamException {
-     id = 0;
-     for (i=0; i<IdLength; i++ ) {
-       databyte = ReadFilterInputPort();
-
-       id = id | (databyte & 0xFF);
-
-       if (i != IdLength-1) {
-         id = id << 8;
-       }
-
-       bytesread++;
-     }
-   }
-
-   private void readMeasurement() throws EndOfStreamException {
-     measurement = 0;
-
-     for (i = 0; i < MeasurementLength; i++) {
-       databyte = ReadFilterInputPort();
-       measurement = measurement | (databyte & 0xFF);
-
-       if (i != MeasurementLength-1) {
-         measurement = measurement << 8;
-       }
-
-       bytesread++;
-     }
-   }
-
 } // SingFilter

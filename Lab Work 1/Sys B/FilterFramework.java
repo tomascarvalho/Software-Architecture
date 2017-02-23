@@ -35,6 +35,7 @@
 ******************************************************************************************************************/
 
 import java.io.*;
+import java.nio.ByteBuffer;
 
 public class FilterFramework extends Thread
 {
@@ -50,6 +51,17 @@ public class FilterFramework extends Thread
 	// output pipe and will send no more data.
 
 	private FilterFramework InputFilter;
+
+  protected int MeasurementLength = 8;		// This is the length of all measurements (including time) in bytes
+  protected int IdLength = 4;				// This is the length of IDs in the byte stream
+
+  protected long measurement;				// This is the word used to store all measurements - conversions are illustrated.
+  protected int id;							// This is the measurement id
+
+  protected byte databyte;  //Where will be stored the actual read data byte
+  protected byte[] byteBuffer;  //Will store every byte needed before send them to the next pipe
+
+  protected int i;  // Used for for loops and things like that
 
 	/***************************************************************************
 	* InnerClass:: EndOfStreamExeception
@@ -317,6 +329,63 @@ public class FilterFramework extends Thread
 		} // catch
 
 	} // ClosePorts
+
+  /**
+   * Responsible to send the already globally stored id to the next pipe
+   * Converting the int value into byte array so the value could be sent byte by byte
+   * @throws EndOfStreamException [If the next pipe is closed]
+   */
+  void sendIdByteBuffer(int idToSend) throws EndOfStreamException {
+    byteBuffer = ByteBuffer.allocate(IdLength).putInt(idToSend).array();
+    for (byte b : byteBuffer) {
+      WriteFilterOutputPort(b);
+    }
+  }
+
+  /**
+   * Responsible to send the already globally stored measurement to the next pipe
+   * Converting the long value into byte array so the value could be sent byte by byte
+   * @throws EndOfStreamException [If the next pipe is closed]
+   */
+  void sendMeasurementByteBuffer(long measurementToSend) throws EndOfStreamException {
+    byteBuffer = ByteBuffer.allocate(MeasurementLength).putLong(measurementToSend).array();
+    for (byte b : byteBuffer) {
+      WriteFilterOutputPort(b);
+    }
+  }
+
+  /**
+   * Responsible to read an id from the stream
+   * @throws EndOfStreamException [If the next pipe is closed]
+   */
+  void readId() throws EndOfStreamException {
+    id = 0;
+    for (i=0; i<IdLength; i++ ) {
+      databyte = ReadFilterInputPort();
+
+      id = id | (databyte & 0xFF);
+
+      if (i != IdLength-1) {
+        id = id << 8;
+      }
+    }
+  }
+
+  /**
+   * Responsible to read a measurement from the stream
+   * @throws EndOfStreamException [If the next pipe is closed]
+   */
+  void readMeasurement() throws EndOfStreamException {
+    measurement = 0;
+    for (i = 0; i < MeasurementLength; i++) {
+      databyte = ReadFilterInputPort();
+      measurement = measurement | (databyte & 0xFF);
+
+      if (i != MeasurementLength-1) {
+        measurement = measurement << 8;
+      }
+    }
+  }
 
 	/***************************************************************************
 	* CONCRETE METHOD:: run

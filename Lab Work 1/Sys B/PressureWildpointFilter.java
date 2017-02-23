@@ -27,21 +27,9 @@
 *
 ******************************************************************************************************************/
 
-import java.nio.ByteBuffer;
-
 public class PressureWildpointFilter extends FilterFramework {
 
-  private int MeasurementLength = 8;		// This is the length of all measurements (including time) in bytes
-  private int IdLength = 4;				// This is the length of IDs in the byte stream
-
-  private long measurement;				// This is the word used to store all measurements - conversions are illustrated.
-  private int id;							// This is the measurement id
-  private double doubleMeasurement;
-
-  private int i;
-  private byte databyte;
-
-  private byte[] byteBuffer;
+  private double doubleMeasurement; //Where is stored the already converted measurement value
 
 	public void run() {
 		while (true) {
@@ -59,8 +47,8 @@ public class PressureWildpointFilter extends FilterFramework {
      readMeasurement();
 
      if(id == 0) {
-       sendIdByteBuffer();
-       sendMeasurementByteBuffer();
+       sendIdByteBuffer(id);
+       sendMeasurementByteBuffer(measurement);
      }
 
      // If is pressure id
@@ -69,49 +57,10 @@ public class PressureWildpointFilter extends FilterFramework {
       //  System.out.println("PressureWildpointFilter value = " + doubleMeasurement);
        if(doubleMeasurement <= 50 || doubleMeasurement >= 80) {
         //  System.out.println("PressureWildpointFilter: Invalid Pressure");
-         sendIdByteBuffer();
-         sendMeasurementByteBuffer();
+         sendIdByteBuffer(id);
+         sendMeasurementByteBuffer(measurement);
        } else {
         //  System.out.println("PressureWildpointFilter: valid Pressure");
-       }
-     }
-   }
-
-   private void sendIdByteBuffer() throws EndOfStreamException {
-     byteBuffer = ByteBuffer.allocate(IdLength).putInt(id).array();
-     for (byte b : byteBuffer) {
-       WriteFilterOutputPort(b);
-     }
-   }
-
-   private void sendMeasurementByteBuffer() throws EndOfStreamException {
-     byteBuffer = ByteBuffer.allocate(MeasurementLength).putLong(measurement).array();
-     for (byte b : byteBuffer) {
-       WriteFilterOutputPort(b);
-     }
-   }
-
-   private void readId() throws EndOfStreamException {
-     id = 0;
-     for (i=0; i<IdLength; i++ ) {
-       databyte = ReadFilterInputPort();
-
-       id = id | (databyte & 0xFF);
-
-       if (i != IdLength-1) {
-         id = id << 8;
-       }
-     }
-   }
-
-   private void readMeasurement() throws EndOfStreamException {
-     measurement = 0;
-     for (i = 0; i < MeasurementLength; i++) {
-       databyte = ReadFilterInputPort();
-       measurement = measurement | (databyte & 0xFF);
-
-       if (i != MeasurementLength-1) {
-         measurement = measurement << 8;
        }
      }
    }

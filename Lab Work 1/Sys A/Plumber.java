@@ -27,31 +27,39 @@ public class Plumber
 		****************************************************************************/
 
 		SourceFilter Filter1 = new SourceFilter();
-        AltitudeFilter Filter2 = new AltitudeFilter();
-		TemperatureFilter Filter3 = new TemperatureFilter();
-		SinkFilter Filter4 = new SinkFilter();
-	   	RemovePressureFilter Filter5 = new RemovePressureFilter();
+        RemovePressureFilter Filter2 = new RemovePressureFilter();
+        RemoveVelocityFilter Filter3 = new RemoveVelocityFilter();
+        RemovePitchFilter Filter4 = new RemovePitchFilter();
+        AltitudeFilter Filter5 = new AltitudeFilter();
+		TemperatureFilter Filter6 = new TemperatureFilter();
+		SinkFilter Filter7 = new SinkFilter();
+
 
 		/****************************************************************************
 		* Here we connect the filters starting with the sink filter (Filter 1) which
 		* we connect to Filter2 the middle filter. Then we connect Filter2 to the
 		* source filter (Filter3).
 		****************************************************************************/
+        Filter7.Connect(Filter6); // This essentially says, "connect Filter7 input port to Filter6 output port
+        Filter6.Connect(Filter5); // This essentially says, "connect Filter6 input port to Filter5 output port
+        Filter5.Connect(Filter4); // This essentially says, "connect Filter5 input port to Filter4 output port
         Filter4.Connect(Filter3); // This essentially says, "connect Filter4 input port to Filter3 output port"
 		Filter3.Connect(Filter2); // This essentially says, "connect Filter3 input port to Filter2 output port
-	   	Filter2.Connect(Filter5);
+        Filter2.Connect(Filter1); // This essentially says, "connect Filter2 input port to Filter1 output port
+
 	    //Filter2.Connect(Filter1); // This essentially says, "connect Filter2 intput port to Filter1 output port
-		Filter5.Connect(Filter1); // This essentially says, "connect Filter2 intput port to Filter1 output port
 
 		/****************************************************************************
 		* Here we start the filters up. All-in-all,... its really kind of boring.
 		****************************************************************************/
 
 		Filter1.start();
-	   	Filter5.start();
 		Filter2.start();
 		Filter3.start();
         Filter4.start();
+        Filter5.start();
+        Filter6.start();
+        Filter7.start();
 
 
    } // main

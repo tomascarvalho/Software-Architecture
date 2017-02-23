@@ -46,12 +46,12 @@ public class Plumber
 		****************************************************************************/
 
 
-		SourceFilter            source = new SourceFilter();	// This is a source filter - see SourceFilterTemplate.java
+	SourceFilter            source = new SourceFilter();	// This is a source filter - see SourceFilterTemplate.java
     AltitudeFilter          altitudeFilter = new AltitudeFilter();
     TemperatureFilter       temperatureFilter = new TemperatureFilter();
-		PressureFilter          pressureFilter = new PressureFilter();	// This is a standard filter - see FilterTemplate.java
+	PressureFilter          pressureFilter = new PressureFilter();	// This is a standard filter - see FilterTemplate.java
     PressureWildpointFilter pressureWildpointFilter = new PressureWildpointFilter();
-		WildpointSinkFilter     wildpointSinkFilter = new WildpointSinkFilter();		// This is a sink filter - see SinkFilterTemplate.java
+	WildpointSinkFilter     wildpointSinkFilter = new WildpointSinkFilter();		// This is a sink filter - see SinkFilterTemplate.java
     SinkFilter              sinkFilter = new SinkFilter();
     MiddleFilter            middleFilter = new MiddleFilter();
 

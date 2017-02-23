@@ -1,18 +1,71 @@
+/******************************************************************************************************************
+* File:FilterFramework.java
+* Course: 17655
+* Project: Assignment 1
+* Copyright: Copyright (c) 2003 Carnegie Mellon University
+* Versions:
+*	1.0 November 2008 - Initial rewrite of original assignment 1 (ajl).
+*
+* Description:
+*
+* This superclass defines a skeletal filter framework that defines a filter in terms of the input and output
+* ports. All filters must be defined in terms of this framework - that is, filters must extend this class
+* in order to be considered valid system filters. Filters as standalone threads until the inputport no longer
+* has any data - at which point the filter finishes up any work it has to do and then terminates.
+*
+* Parameters:
+*
+* InputReadPort:	This is the filter's input port. Essentially this port is connected to another filter's piped
+*					output steam. All filters connect to other filters by connecting their input ports to other
+*					filter's output ports. This is handled by the Connect() method.
+*
+* OutputWritePort:	This the filter's output port. Essentially the filter's job is to read data from the input port,
+*					perform some operation on the data, then write the transformed data on the output port.
+*
+* FilterFramework:  This is a reference to the filter that is connected to the instance filter's input port. This
+*					reference is to determine when the upstream filter has stopped sending data along the pipe.
+*
+* Internal Methods:
+*
+*	public void Connect( FilterFramework Filter )
+*	public byte ReadFilterInputPort()
+*	public void WriteFilterOutputPort(byte datum)
+*	public boolean EndOfInputStream()
+*
+******************************************************************************************************************/
+
 import java.io.*;
+import java.nio.ByteBuffer;
 
 public class FilterFramework extends Thread
 {
 	// Define filter input and output ports
 
-	protected PipedInputStream InputReadPort = new PipedInputStream();
-	protected PipedOutputStream OutputWritePort = new PipedOutputStream();
+	private PipedInputStream InputReadPortA = new PipedInputStream();
+	private PipedInputStream InputReadPortB = new PipedInputStream();
+	private PipedOutputStream OutputWritePortA = new PipedOutputStream();
+	private PipedOutputStream OutputWritePortB = new PipedOutputStream();
 
 	// The following reference to a filter is used because java pipes are able to reliably
 	// detect broken pipes on the input port of the filter. This variable will point to
 	// the previous filter in the network and when it dies, we know that it has closed its
 	// output pipe and will send no more data.
 
-	protected FilterFramework InputFilter;
+	private FilterFramework InputFilterA;
+	private FilterFramework InputFilterB;
+
+  protected int MeasurementLength = 8;		// This is the length of all measurements (including time) in bytes
+  protected int IdLength = 4;				// This is the length of IDs in the byte stream
+
+  protected long measurementA;				// This is the word used to store all measurements - conversions are illustrated.
+  protected long measurementB;				// This is the word used to store all measurements - conversions are illustrated.
+  protected int idA;							// This is the measurement id
+  protected int idB;							// This is the measurement id
+
+  private byte databyte;  //Where will be stored the actual read data byte
+  protected byte[] byteBuffer;  //Will store every byte needed before send them to the next pipe
+
+  protected int i;  // Used for for loops and things like that
 
 	/***************************************************************************
 	* InnerClass:: EndOfStreamExeception
@@ -52,20 +105,39 @@ public class FilterFramework extends Thread
 	*
 	****************************************************************************/
 
-	void Connect( FilterFramework Filter )
+	void ConnectA( FilterFramework Filter )
 	{
 		try
 		{
 			// Connect this filter's input to the upstream pipe's output stream
 
-			InputReadPort.connect( Filter.OutputWritePort );
-			InputFilter = Filter;
+			InputReadPortA.connect( Filter.OutputWritePortA );
+			InputFilterA = Filter;
 
 		} // try
 
 		catch( Exception Error )
 		{
-			System.out.println(this.getName() + " FilterFramework error connecting::"+ Error );
+			System.out.println( "\n" + this.getName() + " FilterFramework error connecting::"+ Error );
+
+		} // catch
+
+	} // Connect
+
+  void ConnectB( FilterFramework Filter )
+	{
+		try
+		{
+			// Connect this filter's input to the upstream pipe's output stream
+
+			InputReadPortB.connect( Filter.OutputWritePortA );
+			InputFilterB = Filter;
+
+		} // try
+
+		catch( Exception Error )
+		{
+			System.out.println( "\n" + this.getName() + " FilterFramework error connecting::"+ Error );
 
 		} // catch
 
@@ -98,16 +170,18 @@ public class FilterFramework extends Thread
 		* while we are waiting. If this happens and we do not check for the end of
 		* stream, then we could wait forever on an upstream pipe that is long gone.
 		* Unfortunately Java pipes do not throw exceptions when the input pipe is
-		* broken.
+		* broken. So what we do here is to see if the upstream filter is alive.
+		* if it is, we assume the pipe is still open and sending data. If the
+		* filter is not alive, then we assume the end of stream has been reached.
 		***********************************************************************/
 
 		try
 		{
-			while (InputReadPort.available()==0 )
+			while (InputReadPortA.available()==0 )
 			{
 				if (EndOfInputStream())
 				{
-					throw new EndOfStreamException("End of input stream reached");
+					throw new EndOfStreamException("End of input A stream reached");
 
 				} //if
 
@@ -125,7 +199,7 @@ public class FilterFramework extends Thread
 
 		catch( Exception Error )
 		{
-			System.out.println(this.getName() + " Error in read port wait loop::" + Error );
+			System.out.println( "\n" + this.getName() + " Error in read port A wait loop::" + Error );
 
 		} // catch
 
@@ -136,14 +210,95 @@ public class FilterFramework extends Thread
 
 		try
 		{
-			datum = (byte)InputReadPort.read();
+			datum = (byte)InputReadPortA.read();
 			return datum;
 
 		} // try
 
 		catch( Exception Error )
 		{
-			System.out.println(this.getName() + " Pipe read error::" + Error );
+			System.out.println( "\n" + this.getName() + " Pipe read error::" + Error );
+			return datum;
+
+		} // catch
+
+	} // ReadFilterPort
+
+	/***************************************************************************
+	* CONCRETE METHOD:: ReadFilterInputPort
+	* Purpose: This method reads data from the input port one byte at a time.
+	*
+	* Arguments: void
+	*
+	* Returns: byte of data read from the input port of the filter.
+	*
+	* Exceptions: IOExecption, EndOfStreamException (rethrown)
+	*
+	****************************************************************************/
+
+	byte ReadFilterInputPortB() throws EndOfStreamException
+	{
+		byte datum = 0;
+
+		/***********************************************************************
+		* Since delays are possible on upstream filters, we first wait until
+		* there is data available on the input port. We check,... if no data is
+		* available on the input port we wait for a quarter of a second and check
+		* again. Note there is no timeout enforced here at all and if upstream
+		* filters are deadlocked, then this can result in infinite waits in this
+		* loop. It is necessary to check to see if we are at the end of stream
+		* in the wait loop because it is possible that the upstream filter completes
+		* while we are waiting. If this happens and we do not check for the end of
+		* stream, then we could wait forever on an upstream pipe that is long gone.
+		* Unfortunately Java pipes do not throw exceptions when the input pipe is
+		* broken. So what we do here is to see if the upstream filter is alive.
+		* if it is, we assume the pipe is still open and sending data. If the
+		* filter is not alive, then we assume the end of stream has been reached.
+		***********************************************************************/
+
+		try
+		{
+			while (InputReadPortB.available()==0 )
+			{
+				if (EndOfInputStreamB())
+				{
+					throw new EndOfStreamException("End of input B stream reached");
+
+				} //if
+
+				sleep(250);
+
+			} // while
+
+		} // try
+
+		catch( EndOfStreamException Error )
+		{
+			throw Error;
+
+		} // catch
+
+		catch( Exception Error )
+		{
+			System.out.println( "\n" + this.getName() + " Error in read port B wait loop::" + Error );
+
+		} // catch
+
+		/***********************************************************************
+		* If at least one byte of data is available on the input
+		* pipe we can read it. We read and write one byte to and from ports.
+		***********************************************************************/
+
+		try
+		{
+			datum = (byte)InputReadPortB.read();
+			return datum;
+
+		} // try
+
+		catch( Exception Error )
+		{
+			System.out.println( "\n" + this.getName() + " Pipe read error::" + Error );
 			return datum;
 
 		} // catch
@@ -168,20 +323,35 @@ public class FilterFramework extends Thread
 	{
 		try
 		{
-            OutputWritePort.write((int) datum );
-		   	OutputWritePort.flush();
-
+      OutputWritePortA.write((int) datum );
+		  OutputWritePortA.flush();
 		} // try
 
 		catch( Exception Error )
 		{
-			System.out.println(this.getName() + " Pipe write error::" + Error );
+			System.out.println("\n" + this.getName() + " Pipe A write error::" + Error );
 
 		} // catch
 
 		return;
 
 	} // WriteFilterPort
+
+  void WriteFilterOutputPortB(byte datum) {
+    try
+		{
+      OutputWritePortB.write((int) datum );
+		  OutputWritePortB.flush();
+		} // try
+
+		catch( Exception Error )
+		{
+			System.out.println("\n" + this.getName() + " Pipe B write error::" + Error );
+
+		} // catch
+
+    return;
+  }
 
 	/***************************************************************************
 	* CONCRETE METHOD:: EndOfInputStream
@@ -202,7 +372,21 @@ public class FilterFramework extends Thread
 
 	private boolean EndOfInputStream()
 	{
-		if (InputFilter.isAlive())
+		if (InputFilterA.isAlive())
+		{
+			return false;
+
+		} else {
+
+			return true;
+
+		} // if
+
+	} // EndOfInputStream
+
+	private boolean EndOfInputStreamB()
+	{
+		if (InputFilterB.isAlive())
 		{
 			return false;
 
@@ -232,17 +416,133 @@ public class FilterFramework extends Thread
 	{
 		try
 		{
-			InputReadPort.close();
-			OutputWritePort.close();
+			InputReadPortA.close();
+			InputReadPortB.close();
+			OutputWritePortA.close();
+      OutputWritePortB.close();
 
 		}
 		catch( Exception Error )
 		{
-			System.out.println(this.getName() + " ClosePorts error::" + Error );
+			System.out.println( "\n" + this.getName() + " ClosePorts error::" + Error );
 
 		} // catch
 
 	} // ClosePorts
+
+  /**
+   * Responsible to send the already globally stored id to the next pipe
+   * Converting the int value into byte array so the value could be sent byte by byte
+   * @throws EndOfStreamException [If the next pipe is closed]
+   */
+  void sendIdByteBuffer(int idToSend) throws EndOfStreamException {
+    byteBuffer = ByteBuffer.allocate(IdLength).putInt(idToSend).array();
+    for (byte b : byteBuffer) {
+      WriteFilterOutputPort(b);
+    }
+  }
+
+  /**
+   * Responsible to send the already globally stored measurement to the next pipe
+   * Converting the long value into byte array so the value could be sent byte by byte
+   * @throws EndOfStreamException [If the next pipe is closed]
+   */
+  void sendMeasurementByteBuffer(long measurementToSend) throws EndOfStreamException {
+    byteBuffer = ByteBuffer.allocate(MeasurementLength).putLong(measurementToSend).array();
+    for (byte b : byteBuffer) {
+      WriteFilterOutputPort(b);
+    }
+  }
+
+  /**
+   * Responsible to send the already globally stored id to the next pipe
+   * Converting the int value into byte array so the value could be sent byte by byte
+   * @throws EndOfStreamException [If the next pipe is closed]
+   */
+  void sendIdByteBufferB(int idToSend) throws EndOfStreamException {
+    byteBuffer = ByteBuffer.allocate(IdLength).putInt(idToSend).array();
+    for (byte b : byteBuffer) {
+      WriteFilterOutputPortB(b);
+    }
+  }
+
+  /**
+   * Responsible to send the already globally stored measurement to the next pipe
+   * Converting the long value into byte array so the value could be sent byte by byte
+   * @throws EndOfStreamException [If the next pipe is closed]
+   */
+  void sendMeasurementByteBufferB(long measurementToSend) throws EndOfStreamException {
+    byteBuffer = ByteBuffer.allocate(MeasurementLength).putLong(measurementToSend).array();
+    for (byte b : byteBuffer) {
+      WriteFilterOutputPortB(b);
+    }
+  }
+
+  /**
+   * Responsible to read an id from the stream
+   * @throws EndOfStreamException [If the next pipe is closed]
+   */
+  void readId() throws EndOfStreamException {
+    idA = 0;
+    for (i=0; i<IdLength; i++ ) {
+      databyte = ReadFilterInputPort();
+
+      idA = idA | (databyte & 0xFF);
+
+      if (i != IdLength-1) {
+        idA = idA << 8;
+      }
+    }
+  }
+
+  /**
+   * Responsible to read a measurement from the stream
+   * @throws EndOfStreamException [If the next pipe is closed]
+   */
+  void readMeasurement() throws EndOfStreamException {
+    measurementA = 0;
+    for (i = 0; i < MeasurementLength; i++) {
+      databyte = ReadFilterInputPort();
+      measurementA = measurementA | (databyte & 0xFF);
+
+      if (i != MeasurementLength-1) {
+        measurementA = measurementA << 8;
+      }
+    }
+  }
+
+  /**
+   * Responsible to read an idB from the stream
+   * @throws EndOfStreamException [If the next pipe is closed]
+   */
+  void readIdB() throws EndOfStreamException {
+    idB = 0;
+    for (i=0; i<IdLength; i++ ) {
+      databyte = ReadFilterInputPortB();
+
+      idB = idB | (databyte & 0xFF);
+
+      if (i != IdLength-1) {
+        idB = idB << 8;
+      }
+    }
+  }
+
+  /**
+   * Responsible to read a measurementB from the stream
+   * @throws EndOfStreamException [If the next pipe is closed]
+   */
+  void readMeasurementB() throws EndOfStreamException {
+    measurementB = 0;
+    for (i = 0; i < MeasurementLength; i++) {
+      databyte = ReadFilterInputPortB();
+      measurementB = measurementB | (databyte & 0xFF);
+
+      if (i != MeasurementLength-1) {
+        measurementB = measurementB << 8;
+      }
+    }
+  }
 
 	/***************************************************************************
 	* CONCRETE METHOD:: run

@@ -1,6 +1,5 @@
 /******************************************************************************************************************
-* This class was created, extending FilterFramework, to allow a filter to receive input from two different pipes.
-This is not the
+* This class was created, extending FilterFramework, to allow a filter to receive input from two pipes.
 ******************************************************************************************************************/
 
 import java.io.*;
@@ -77,17 +76,18 @@ public class DoubleFilterFramework extends FilterFramework
 
     /***************************************************************************
     * CONCRETE METHOD:: ReadFilterInputPort
-    * Purpose: This method reads data from the input port one byte at a time.
-    * It reads everything there is to read from the first input port, and then
-    * everything there is to read from the second input port
+    * Purpose: This method reads data from the input port specified by the input port Number one byte at a time.
     *
-    * Arguments: void
+    *
+    * Arguments: InputReadPortNumber
+
     *
     * Returns: byte of data read from each input port of the filter.
     *
     * Exceptions: IOExecption, EndOfStreamException (rethrown)
     *
     ****************************************************************************/
+
 
     byte ReadFilterInputPort(int InputReadPortNumber) throws EndOfStreamException
     {
@@ -291,6 +291,7 @@ public class DoubleFilterFramework extends FilterFramework
     *
     ****************************************************************************/
 
+    //class to store and manipulate byte frames
     class Frame {
       long[] frame = new long[FrameLenght];
       long time_measurement;
@@ -302,13 +303,10 @@ public class DoubleFilterFramework extends FilterFramework
       public void send() throws EndOfStreamException {
         //System.out.println("Sending frame...");
         for( i = 0; i < FrameLenght; i++) {
-          if(i == 0) {
+
             sendIdByteBuffer(i);
             sendMeasurementByteBuffer(frame[i]);
-          } else {
-            sendIdByteBuffer(i);
-            sendMeasurementByteBuffer(frame[i]);
-          }
+
         }
         //System.out.println("Frame sent...");
       }

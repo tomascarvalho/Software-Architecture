@@ -8,8 +8,7 @@ public class SystemC
 
 		SourceFilter Filter1 = new SourceFilter("SubSetA.dat");	//Reads from first file
 		SourceFilter Filter2 = new SourceFilter("SubSetB.dat"); //Reads from second file
-		MergeFilter Filter3 = new MergeFilter(); //Merges the content from both files
-		//SortFilter Filter4 = new SortFilter(); //Sorts the frames of both files
+		MergeFilter Filter3 = new MergeFilter(); //Merges And sort the content from both files
 		SinkFilter Filter4 = new SinkFilter(); //Writes to stdout
 
 		/****************************************************************************
@@ -28,7 +27,7 @@ public class SystemC
 		Filter2.start();
 		Filter3.start();
 		Filter4.start();
-		
+
 
    } // main
 

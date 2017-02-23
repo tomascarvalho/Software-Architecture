@@ -1,5 +1,9 @@
 import java.util.*;						// This class is used to interpret time words
-import java.text.SimpleDateFormat;		// This class is used to format and write time in a string format.
+import java.text.SimpleDateFormat;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.PrintStream;		// This class is used to format and write time in a string format.
 
 public class SinkFilter extends FilterFramework
 {
@@ -30,10 +34,25 @@ public class SinkFilter extends FilterFramework
 
 		System.out.println(this.getName() + "::Sink Reading ");
 
+		File fout = new File("OutputC.dat");
+		PrintStream output;
+		try
+		{
+			output = new PrintStream(new FileOutputStream(fout));
+		} // try
+		catch (FileNotFoundException e)
+		{
+			ClosePorts();
+			System.out.print("\n" + this.getName() + "::Sink Exiting; bytes read: " + bytesread);
+			return;
+		} // catch
+
 		while (true)
 		{
 			try
 			{
+
+
 				/***************************************************************************
 				// We know that the first data coming to this filter is going to be an ID and
 				// that it is IdLength long. So we first decommutate the ID bytes.
@@ -101,6 +120,8 @@ public class SinkFilter extends FilterFramework
 				{
 					TimeStamp.setTimeInMillis(measurement);
 					System.out.println(measurement);
+					output.format("%s\n",TimeStampFormat.format(TimeStamp.getTime()) );
+
 
 				} // if
 
@@ -109,11 +130,6 @@ public class SinkFilter extends FilterFramework
 				// making sure we also print the timestamp
 				****************************************************************************/
 
-				else
-				{
-					System.out.println( TimeStampFormat.format(TimeStamp.getTime()) + " ID = " + id + " " + Double.longBitsToDouble(measurement) );
-
-				} // if
 
 			} // try
 
@@ -129,7 +145,8 @@ public class SinkFilter extends FilterFramework
 				System.out.print(this.getName() + "::Sink Exiting; bytes read: " + bytesread );
 				break;
 
-			} // catch
+			}
+
 
 		} // while
 
